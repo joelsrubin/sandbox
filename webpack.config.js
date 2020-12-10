@@ -42,6 +42,7 @@ module.exports = {
       loader: 'babel-loader'
     }, {
       test: /.css$/,
+      include: [path.resolve(__dirname, 'client')],
 
       use: [{
         loader: "style-loader"
