@@ -6,7 +6,7 @@ This repo is a bare-bones React/Node/Express application that can serve as a sta
 npm install
 ```
 
-###In two separate terminals:
+### In two separate terminals:
 ```
 npm run build
 ```
@@ -15,7 +15,7 @@ npm run build
 npm start
 ```
 
-###Store each sandbox on a separate branch:
+### Store each sandbox on a separate branch:
 ```
 git checkout -b branch-name
 ```
