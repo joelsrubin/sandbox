@@ -1,5 +1,7 @@
 body {
-  color: blue;
+  background-color: darkcyan;
+  color: white;
+  text-align: center;
 }
 
 /* css still not loading correctly; seems to be a webpack.config issue */

@@ -32,7 +32,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
   mode: 'development',
-  entry: './client/index.js',
+  entry: './client/index.jsx',
   plugins: [new webpack.ProgressPlugin()],
 
   module: {
@@ -42,8 +42,6 @@ module.exports = {
       loader: 'babel-loader'
     }, {
       test: /.css$/,
-      include: [path.resolve(__dirname, 'client')],
-
       use: [{
         loader: "style-loader"
       }, {

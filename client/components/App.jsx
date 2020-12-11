@@ -1,7 +1,7 @@
 import React from 'react';
 
 const App = () => (
-  <div>hello world!!</div>
+  <div>This text is in client/components/App.jsx</div>
 );
 
 export default App;
