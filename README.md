@@ -1,15 +1,22 @@
-# 🚀 Welcome to your new awesome project!
+# React/Node/Express Sandbox
 
-This project has been created using **webpack scaffold**, you can now run
+This repo is a bare-bones React/Node/Express application that can serve as a starting point for your sandboxing.
 
+```
+npm install
+```
+
+###In two separate terminals:
 ```
 npm run build
 ```
 
-or
-
 ```
-yarn build
+npm start
 ```
 
-to bundle your application
+###Store each sandbox on a separate branch:
+```
+git checkout -b branch-name
+```
+
