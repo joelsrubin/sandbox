@@ -15,8 +15,8 @@ npm run build
 npm start
 ```
 
-### Store each sandbox on a separate branch:
+### Store each project on a separate branch so that you can always start fresh with a clean sandbox:
 ```
-git checkout -b branch-name
+git checkout -b <branch-name>
 ```
 
