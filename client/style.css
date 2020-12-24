@@ -1,7 +1,23 @@
 body {
-  background-color: darkcyan;
-  color: white;
+  background-color: rgb(255, 255, 255);
+  font-family: helvetica;
+  color: rgb(0, 0, 0);
   text-align: center;
+}
+
+.container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+
+
+.weather-tile {
+  border-style: solid;
+  border-color: black;
+  height: 50vh;
+  width: 40vh;
+
 }
 
 /* css still not loading correctly; seems to be a webpack.config issue */
