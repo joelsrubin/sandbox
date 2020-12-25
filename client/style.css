@@ -15,7 +15,7 @@ body {
 .weather-tile {
   border-style: solid;
   border-color: black;
-  height: 50vh;
+  height: 60vh;
   width: 40vh;
 
 }

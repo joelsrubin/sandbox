@@ -2,7 +2,8 @@ import React from 'react';
 import Weather from './Weather.jsx';
 import Future from './Future.jsx';
 import APIKEY from './utils.jsx';
-import axios from 'axios';
+
+import 'regenerator-runtime/runtime'
 
 class App extends React.Component {
   constructor(props) {
@@ -11,11 +12,20 @@ class App extends React.Component {
       city: null,
       value: '',
       apiKey: APIKEY,
-      data: null
+      data: '',
+      lat: '',
+      lon: '',
+      future: ''
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.getWeather = this.getWeather.bind(this)
+    this.getForecast = this.getForecast.bind(this)
+  }
+
+componentDidMount () {
+// this.getWeather('DesMoines',APIKEY)
+
   }
 
 handleChange(e) {
@@ -24,27 +34,46 @@ handleChange(e) {
   })
 }
 
-handleSubmit(e) {
-
+ handleSubmit(e) {
   this.setState({
     city: this.state.value
   })
- this.getWeather(this.state.city, APIKEY)
+  this.getWeather(this.state.value, APIKEY)
+  this.getForecast(APIKEY)
   e.preventDefault()
 }
 
+
 getWeather (city, APIKEY) {
-   fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${this.state.apiKey}`)
+   return fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${APIKEY}`)
     .then((result) => result.json())
     .then((json) => {
-     console.log(json.main)
+     console.log(json.coord)
      this.setState ({
-       data: json.main
+       data: json.main,
+       lat: json.coord.lat,
+       lon: json.coord.lon
      })
     })
     .catch((error) => {
     console.error(error)
     });
+}
+
+getForecast (APIKEY) {
+  let lat = this.state.lat
+  let lon = this.state.lon
+  return fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=current,minutely,hourly,alerts&units=imperial&appid=${APIKEY}`)
+  .then((result) => result.json())
+  .then((json) => {
+    console.log(json.daily[0].temp)
+    this.setState({
+      future: json.daily[0].temp
+    })
+  })
+  .catch((error) => {
+    console.error(error)
+  })
 }
 
 render() {
@@ -59,8 +88,8 @@ console.log(this.state.city)
     </form>
     <br></br>
     <div className="container">
-      <Weather city={this.state.city}/>
-      <Future city={this.state.city}/>
+      <Weather info={this.state.data} />
+      <Future future={this.state.future}/>
     </div>
   </div>);
 };
