@@ -10,12 +10,13 @@ class App extends React.Component {
     super(props)
     this.state = {
       city: null,
+      current: [],
       value: '',
-      apiKey: APIKEY,
       data: '',
       lat: '',
       lon: '',
-      future: ''
+      future: '',
+      spread: []
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -24,9 +25,11 @@ class App extends React.Component {
   }
 
 componentDidMount () {
-// this.getWeather('DesMoines',APIKEY)
+ this.getWeather('DesMoines',APIKEY)
+ this.getForecast(this.state.lat, this.state.lon)
+ }
 
-  }
+
 
 handleChange(e) {
   this.setState({
@@ -37,19 +40,21 @@ handleChange(e) {
  handleSubmit(e) {
   this.setState({
     city: this.state.value
+
   })
-  this.getWeather(this.state.value, APIKEY)
-  this.getForecast(APIKEY)
+  this.getWeather(this.state.value)
+  this.getForecast(this.state.lat,this.state.lon)
   e.preventDefault()
 }
 
 
-getWeather (city, APIKEY) {
+getWeather (city) {
    return fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${APIKEY}`)
     .then((result) => result.json())
     .then((json) => {
-     console.log(json.coord)
+     console.log(json.weather[0].icon)
      this.setState ({
+       current: json.weather,
        data: json.main,
        lat: json.coord.lat,
        lon: json.coord.lon
@@ -60,15 +65,14 @@ getWeather (city, APIKEY) {
     });
 }
 
-getForecast (APIKEY) {
-  let lat = this.state.lat
-  let lon = this.state.lon
+getForecast (lat, lon) {
   return fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=current,minutely,hourly,alerts&units=imperial&appid=${APIKEY}`)
   .then((result) => result.json())
   .then((json) => {
-    console.log(json.daily[0].temp)
+    console.log(json.daily)
     this.setState({
-      future: json.daily[0].temp
+      future: json.daily[0].temp,
+      spread: json.daily
     })
   })
   .catch((error) => {
@@ -78,7 +82,7 @@ getForecast (APIKEY) {
 
 render() {
 
-console.log(this.state.city)
+console.log('spread:',this.state.spread)
   return (<div>
     <div>
     <h1>Look up the weather in:</h1><h1>{this.state.city}</h1>
@@ -87,9 +91,16 @@ console.log(this.state.city)
       <input type="text" value={this.state.value} onChange={this.handleChange} placeholder="Enter Your Town" />
     </form>
     <br></br>
-    <div className="container">
-      <Weather info={this.state.data} />
-      <Future future={this.state.future}/>
+    <div >
+      <div>
+      <Weather current={this.state.current} info={this.state.data} />
+      </div>
+      <br></br>
+      <div className="container">
+      {/* <Future future={this.state.future} /> */}
+      {this.state.spread.map(day =>
+      <Future day={day} key={day.dt}/>)}
+      </div>
     </div>
   </div>);
 };

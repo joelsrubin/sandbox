@@ -3,18 +3,16 @@ import App from './App.jsx'
 
 
 const Future = (props) => {
-
+let picUrl = `http://openweathermap.org/img/wn/${props.day.weather[0].icon}.png`;
   return (
     <div>
-    <div className="weather-tile">
+    <div className="future-tile">
       <div className="header">
-      <h2>Tomorrow's Weather</h2>
+      <h2>Forecast</h2>
       </div>
       <div>
-        <h5>Day</h5><h5>{props.future.day}</h5>
-        <h5>Evening</h5><h5>{props.future.eve}</h5>
-        <h5>High</h5><h5>{props.future.max}</h5>
-        <h5>Low</h5><h5>{props.future.min}</h5>
+       <img src={picUrl} alt="id"/>
+       <h3>{props.day.weather[0].description}</h3>
 
       </div>
     </div>
