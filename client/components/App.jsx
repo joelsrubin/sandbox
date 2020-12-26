@@ -9,7 +9,7 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      city: null,
+      city: 'Des Moines',
       current: [],
       spread: [],
       future: '',
@@ -25,8 +25,8 @@ class App extends React.Component {
   }
 
 componentDidMount () {
- this.getWeather('DesMoines',APIKEY)
- this.getForecast(this.state.lat, this.state.lon)
+ this.getWeather('Des Moines', APIKEY)
+ this.getForecast('41.5868', '93.6250')
  }
 
 
@@ -38,12 +38,17 @@ handleChange(e) {
 }
 
  handleSubmit(e) {
-  this.setState({
-    city: this.state.value
 
+   let tempCity = this.state.value.slice(0,1).toUpperCase()
+   let restCity = this.state.value.slice(1);
+   let fullCity = tempCity + restCity
+
+  this.setState({
+    city: fullCity
   })
+
   this.getWeather(this.state.value)
-  this.getForecast(this.state.lat,this.state.lon)
+  this.getForecast(this.state.lat, this.state.lon)
   e.preventDefault()
 }
 
@@ -83,13 +88,13 @@ getForecast (lat, lon) {
 
 render() {
 
-console.log('spread:',this.state.spread)
-  return (<div>
+  return (
+  <div>
     <div>
     <h1>Look up the weather in:</h1><h1>{this.state.city}</h1>
     </div>
     <form onSubmit={this.handleSubmit}>
-      <input type="text" value={this.state.value} onChange={this.handleChange} placeholder="Enter Your Town" />
+      <input type="text" value={this.state.value} onChange={this.handleChange} placeholder="Enter Your Town" spellCheck="false"/>
     </form>
     <br></br>
     <div >

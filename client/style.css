@@ -1,8 +1,17 @@
 body {
-  background-color: rgb(103, 125, 246);
+  background-color: lightgray;
   font-family: helvetica;
   color: rgb(0, 0, 0);
   text-align: center;
+}
+
+.weather-header{
+  display: flex;
+  justify-content: space-around;
+}
+
+img {
+  align-self: center;
 }
 
 .container {
@@ -14,7 +23,8 @@ body {
 
 .future-tile {
   border-style: solid;
-  border-color: black;
+  border-color: rgb(77, 77, 77);
+  background-color: rgb(189, 189, 189);
   height: 30vh;
   width: 20vh;
   border-radius: 30px
@@ -24,16 +34,22 @@ body {
   display: flex;
   justify-content: space-around;
 }
+
 .weather-tile {
   margin: auto;
   width: 50%;
-  border: 3px solid rgb(0, 0, 0);
+  border: 3px solid rgb(77, 77, 77);
+  background-color: rgb(189, 189, 189);
   padding: 10px;
   justify-content: center;
   height: 20vh;
   width: 60vh;
   border-radius: 30px
 
+}
+
+input {
+  text-transform: capitalize;
 }
 
 /* css still not loading correctly; seems to be a webpack.config issue */

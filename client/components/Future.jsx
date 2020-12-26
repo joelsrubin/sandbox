@@ -18,7 +18,7 @@ let picUrl = `http://openweathermap.org/img/wn/${props.day.weather[0].icon}.png`
        <img src={picUrl} alt="id"/>
        <h3>{props.day.weather[0].description}</h3>
       </div>
-      <h3>{Math.round(props.day.temp.max)}/{Math.round(props.day.temp.min)}</h3>
+      <h3>{Math.round(props.day.temp.max)} / {Math.round(props.day.temp.min)}</h3>
     </div>
     </div>
   )
