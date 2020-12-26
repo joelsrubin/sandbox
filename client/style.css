@@ -1,5 +1,5 @@
 body {
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(103, 125, 246);
   font-family: helvetica;
   color: rgb(0, 0, 0);
   text-align: center;
@@ -7,7 +7,9 @@ body {
 
 .container {
   display: flex;
-  justify-content: space-evenly
+  justify-content: space-evenly;
+  flex-shrink: 3;
+  flex-wrap: wrap
 }
 
 .future-tile {
@@ -15,6 +17,7 @@ body {
   border-color: black;
   height: 30vh;
   width: 20vh;
+  border-radius: 30px
 }
 
 .titles {
@@ -29,6 +32,7 @@ body {
   justify-content: center;
   height: 20vh;
   width: 60vh;
+  border-radius: 30px
 
 }
 

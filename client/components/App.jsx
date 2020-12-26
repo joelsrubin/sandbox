@@ -11,12 +11,12 @@ class App extends React.Component {
     this.state = {
       city: null,
       current: [],
+      spread: [],
+      future: '',
       value: '',
       data: '',
       lat: '',
-      lon: '',
-      future: '',
-      spread: []
+      lon: ''
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -70,6 +70,7 @@ getForecast (lat, lon) {
   .then((result) => result.json())
   .then((json) => {
     console.log(json.daily)
+    let array = json.daily.shift()
     this.setState({
       future: json.daily[0].temp,
       spread: json.daily
@@ -96,8 +97,9 @@ console.log('spread:',this.state.spread)
       <Weather current={this.state.current} info={this.state.data} />
       </div>
       <br></br>
+      <h2>7 Day Forecast</h2>
+      <br></br>
       <div className="container">
-      {/* <Future future={this.state.future} /> */}
       {this.state.spread.map(day =>
       <Future day={day} key={day.dt}/>)}
       </div>
